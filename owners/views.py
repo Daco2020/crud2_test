@@ -58,14 +58,15 @@ class OwnersView(View):
                 "age" : i.age,
                 "email" : i.email
                 })
-
-            for a in result:
-                dog_result = a.dog_set.all()
-                for j in dog_result:
-                    dog_list.append({
-                        "dog_name" : j.name,
-                        "dog_age" : j.age
-                        })
+            dog_result = i.dog_set.all()
+            # print(f"a :: {dog_result}")
+            # print(f"dog list :: {dog_result.values('id', 'name')}")
+            for j in dog_result:
+                dog_list.append({
+                    "dog_name" : j.name,
+                    "dog_age" : j.age,
+                    "owner_name" : j.owner.name
+                    })
             # 오너에 대한 정보를 검색하면 강아지들이 함께 나오도록 하였다. 하지만 현재 for문으로는 오너를 여러명 조회할 경우 강아지 리스트가 오너의 수만큼 중복되어 나온다.                    
 
 
